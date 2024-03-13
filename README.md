@@ -1,24 +1,61 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usersテーブル
 
-Things you may want to cover:
+| Column             | Type   | Options     |
+|--------------------|--------|-------------|
+| nickname           | string | null: false |
+| username           | string | null: false |
+| encrypted_password | string | null: false |
 
-* Ruby version
+### Association
 
-* System dependencies
+-has_many :plans
 
-* Configuration
+## plansテーブル
 
-* Database creation
+| Column        | Type       | Options                        |
+|---------------|------------|--------------------------------|
+| name          | string     | null: false                    |
+| team          | references | null: false, foreign_key: true |
+| opponent_team | references | null: false, foreign_key: true |
+| user          | references | null: false, foreign_key: true |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+-has_one :team
+-has_one :opponent_team
 
-* Services (job queues, cache servers, search engines, etc.)
+## teamsテーブル
 
-* Deployment instructions
+| Column    | Type       | Options                        |
+|-----------|------------|--------------------------------|
+| name      | string     | null: false                    |
+| z1_player | integer    | null: false                    |
+| z2_player | integer    | null: false                    |
+| z3_player | integer    | null: false                    |
+| z4_player | integer    | null: false                    |
+| z5_player | integer    | null: false                    |
+| z6_player | integer    | null: false                    |
+| plan      | references | null: false, foreign_key: true |
 
-* ...
+### Association
+
+-belongs_to :plan
+
+## opponent_teamsテーブル
+
+| Column    | Type       | Options                        |
+|-----------|------------|--------------------------------|
+| name      | string     | null: false                    |
+| z1_player | integer    | null: false                    |
+| z2_player | integer    | null: false                    |
+| z3_player | integer    | null: false                    |
+| z4_player | integer    | null: false                    |
+| z5_player | integer    | null: false                    |
+| z6_player | integer    | null: false                    |
+| plan      | references | null: false, foreign_key: true |
+
+### Association
+
+-belongs_to :plan
